@@ -1,0 +1,18 @@
+	Image
+
+(string? x) or (>= x 0) = ROCKET
+
+(<= -3 x -1) = (text (number->string x) 20 "red")
+
+	Y position
+(string? x) = (- HEIGHT CENTER)
+
+(<= -3 x -1) = (* 3/4 WIDTH)
+
+(>= x 0) = (- x CENTER)
+
+	BACKGROUND
+
+(string? x) or (>= x 0) = BACKG
+
+(<= -3 x -1) = (place-image ROCKET 10 (- HEIGHT CENTER) BACKG)

@@ -1,0 +1,30 @@
+Exercise 88. Define a structure type that keeps track of the cat’s
+x-coordinate and its happiness. Then formulate a data definition for
+cats, dubbed VCat, including an interpretation. 
+
+(define-struct vcat [x happiness])
+; VCat is a structure:
+;   (make-vcat Number Number)
+; interpretation a point x pixels from left, and happines value
+; between 0 and 100
+
+Exercise 89. Design the happy-cat world program, which manages a walking
+cat and its happiness level. Let’s assume that the cat starts out with
+perfect happiness.
+
+VCat -> VCat
+; launches the progam from some initial state
+(define (happy-cat cat)
+  (big-bang cat
+    [to-draw ...]
+    [on-tick ...]))
+
+; VCat -> Image
+; when needed, big-bang obtains the image of the current 
+; state of the world by evaluating (render cat) 
+(define (render cat) ...)
+
+; VCat -> VCat
+; for each tick of the clock, big-bang obtains the next 
+; state of the world from (walk cat) 
+(define (walk cat) ...)

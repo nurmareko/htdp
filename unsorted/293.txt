@@ -1,0 +1,44 @@
+find test case
+
+(check-satisfied (find 0 '()) (found? 0 '()))
+(check-satisfied (find 0 '(1 1 1)) (found? 0 '(1 1 1)))
+(check-satisfied (find 0 '(0 1 1)) (found? 0 '(0 1 1)))
+(check-satisfied (find 0 '(1 0 1)) (found? 0 '(1 0 1)))
+(check-satisfied (find 0 '(1 1 0)) (found? 0 '(1 1 0)))
+(check-satisfied (find 0 '(0 0 0)) (found? 0 '(0 0 0)))
+;=======================================================================;
+confirm that result is the correct answer
+
+result must be #false or non-empty list of X
+(check-expect [(found? 0 '()) 0] #false)
+(check-expect [(found? 0 '()) #true] #false)
+(check-expect [(found? 0 '(0)) '()] #false)
+
+if result is #false, confirm that X is not appear in lx
+(check-expect [(found? 0 '()) #false] #true)
+(check-expect [(found? 0 '(1 1 1)) #false] #true)
+(check-expect [(found? 0 '(1 0 1)) #false] #false)
+
+if result is non-empty list of x. confirm that result is a sublist of lx
+(check-expect [(found? 0 '(0)) '(0)] #true)
+(check-expect [(found? 0 '(1 0 1 1)) '(0 1 1)] #true)
+(check-expect [(found? 0 '(1 0 1 0 0)) '(0 1 0 0)] #true)
+(check-expect [(found? 0 '(1 0 1 1)) '(0 1 1 1)] #false)
+(check-expect [(found? 0 '(1 0 1 1)) '(0 1)] #false)
+(check-expect [(found? 0 '(1 0 1 1)) '(0)] #false)
+(check-expect [(found? 0 '(1 0 1 0 0)) '(0 0)] #false)
+;=======================================================================;
+confirm that l-a is a subilst of l-b
+(check-expect (sublist? '(0) '(0)) #true)
+(check-expect (sublist? '(0) '(1 0)) #true)
+(check-expect (sublist? '(0 0) '(1 0 0)) #true)
+(check-expect (sublist? '(0) '(1)) #false)
+(check-expect (sublist? '(0) '(0 1)) #false)
+(check-expect (sublist? '(1 0) '(1 0 0)) #false)
+
+
+
+l-a length must be equal to or less than l-b, and
+is first item on l-a and l-b equal?,
+if true is l-a equal to l-b?
+if not search rest of l-b

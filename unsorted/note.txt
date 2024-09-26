@@ -1,0 +1,55 @@
+Define one function per task.
+
+For every constant mentioned in a problem statement, introduce one
+constant definition.
+
+model-view-controller (MVC)
+
+the template mirrors the organization of sub-classes with a cond.
+
+single point of control
+
+what does the function compute?
+
+data example
+
+A data definition serves two purposes. First, it names a collection of
+data—a class—using a meaningful word. Second,Computing scientists use
+“class” to mean something like a “mathematical set.” it informs readers
+how to create elements of this class and how to decide whether some
+arbitrary piece of data belongs to the collection.
+
+A position on a world canvas is uniquely identified by two pieces of
+data: the distance from the left margin and the distance from the top
+margin. The first is called an x-coordinate and the second one is the
+y-coordinate.
+
+; distances in terms of pixels:
+(define HEIGHT 200)
+(define MIDDLE (quotient HEIGHT 2))
+(define WIDTH  400)
+(define CENTER (quotient WIDTH 2))
+
+For structure types, this calls for a description of what kind of data
+goes into which field.
+
+; Posn -> Image
+; adds a red spot to MTS at p
+(define (scene+dot p) MTS)
+Adding a purpose statement is straightforward. As Designing Functions
+mentions, it uses the function’s parameter to express what the function
+computes.
+
+Note Functions such as posn-up-x are often called updaters or functional
+setters. They are extremely useful when you write large programs. 
+
+If a function deals with nested structures, develop one function per level
+of nesting.
+
+Defining enumerations and intervals means distinguishing among different
+kinds of elements. To distinguish in code requires conditional functions.
+
+Every time we say “piece of information,” we don’t necessarily mean a
+single number or a single word. A piece of information may itself combine
+several pieces of information. Creating a data representation for that
+kind of information naturally leads to nested structures.

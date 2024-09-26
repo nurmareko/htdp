@@ -1,0 +1,24 @@
+Exercise 81. Design the function time->seconds, which consumes instances
+of time structures (see exercise 77) and produces the number of seconds
+that have passed since midnight. For example, if you are representing 12
+hours, 30 minutes, and 2 seconds with one of these structures and if you
+then apply time->seconds to this instance, the correct result is 45002.
+
+(define-struct time [hour minute second])
+; Time is (make-time Number Number Number)
+(define ex1 (make-time 12 30 2))
+(define ex1 (make-time 2 80 100))
+
+; Time -> Number
+; convert t to time in seconds
+(define (time->seconds t) 0)
+
+(check-expect (time->seconds ex1) 45002)
+(check-expect (time->seconds ex2) 12100)
+
+(define (time->seconds t)
+  (... (time-hour t) ... (time-minute t) ... (time-second t) ...))
+
+(define (time-seconds t)
+  (+ (* 60 (+ (* 60 (time-hour t)) (time-minute t))) (time-second t)))
+

@@ -1,0 +1,45 @@
+(cons (cons "TTT" empty)
+  (cons empty
+    (cons (cons "put"
+            (cons "up"
+              (cons "in"
+                (cons "a"
+                  (cons "place"
+                    empty)))))
+      (cons (cons "where"
+              (cons "it's"
+                (cons "easy"
+                  (cons "to"
+                    (cons "see"
+                      empty)))))
+        (cons (cons "the"
+                (cons "cryptic"
+                  (cons "admonishment"
+                    empty)))
+          (cons (cons "T.T.T." empty)
+            (cons empty
+              (cons (cons "When"
+                      (cons "you"
+                        (cons "feel"
+                          (cons "how"
+                            (cons "depressingly"
+                              empty)))))
+                (cons (cons "slowly"
+                        (cons "you"
+                          (cons "climb,"
+                            empty)))
+                  (cons (cons "it's"
+                          (cons "well"
+                            (cons "to"
+                              (cons "remember"
+                                (cons "that"
+                                  empty)))))
+                    (cons (cons "Things"
+                            (cons "Take"
+                              (cons "Time."
+                                empty)))
+                      (cons empty
+                        (cons (cons"Piet"
+                                (cons"Hein"
+                                  empty))
+                          empty)))))))))))))

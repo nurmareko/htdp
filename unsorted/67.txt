@@ -1,0 +1,40 @@
+(define-struct movie [title producer year])
+Movie is a structure:
+  (make-movie String String String).
+example:
+  (make-movie "Spirited Away" "Hayao Miyazaki" "2001")
+
+make-movie
+
+movie-title
+movie-producer
+movie-year
+
+movie?
+
+(define SPEED 3)
+(define-struct balld [location direction])
+Balld is a structure:
+  (make-balld Number String)
+(make-balld 10 "up")
+interpetation (make-balld 10 "up") represent a ball which at position 10
+pixels from the top and going  up at the speed of 3 pixels per clock tick
+
+
+(define-struct phone [area number])
+Phone is a structure:
+  (make-phone Number Number)
+interpretation the area code and the local phone number.
+
+(define-struct phone# [area switch num])
+Phone# is a structure:
+  (make-phone# Number Number Number)
+interpretaation the area code are the first three digits, the switch code
+are the next three digits, and the last four for phone code.
+
+
+
+ 
+
+
+

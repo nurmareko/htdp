@@ -1,0 +1,16 @@
+(define-struct xexpr [name content])
+
+XEnum is a structure
+  (make-xexpr 'ul [List-of XItem])
+
+XItem is one of structure
+- (make-xexpr 'li [List-of XWord])
+- (make-xexpr 'li [List-of XEnum])
+
+XWord is a structure
+  (make-xexpr 'word (list Text))
+
+Text is
+  (list 'text String)
+
+

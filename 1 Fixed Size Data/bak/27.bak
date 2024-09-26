@@ -1,0 +1,23 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |27|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp")) #f)))
+(define people 120)
+(define price 5.0)
+(define price-change 15)
+(define per-ten-cent 0.1)
+
+(define COST-FIXED 180)
+(define COST-VARIABLE 0.04)
+
+(define (attendees ticket-price)
+  (- people (* (- ticket-price price) (/ price-change per-ten-cent))))
+
+(define (revenue ticket-price)
+  (* ticket-price (attendees ticket-price)))
+
+(define (cost ticket-price)
+  (+ COST-FIXED (* COST-VARIABLE (attendees ticket-price))))
+
+(define (profit ticket-price)
+  (- (revenue ticket-price)
+     (cost ticket-price)))

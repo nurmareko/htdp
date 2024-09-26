@@ -1,0 +1,59 @@
+Exercise 82. Design the function compare-word. The function consumes two
+three-letter words (see exercise 78). It produces a word that indicates
+where the given ones agree and disagree. The function retains the content
+of the structure fields if the two agree; otherwise it places #false in
+the field of the resulting word. Hint The exercises mentions two tasks:
+the comparison of words and the comparison of “letters.” 
+
+; Letter is one of:
+; - #false
+; - OneLetterString, "a" through "z"
+; examples:
+;   #f
+;   "a"
+;   ...
+;   "y"
+;   "z"
+
+(define-struct word [first second third])
+; Word is (make-word Letter Letter Letter)
+; examples:
+;   (define ex1 (make-word "d" "o" "g"))
+;   (define ex2 (make-word #f "a" "t"))
+;   (define ex3 (make-word #f #f #f))
+
+; Word Word -> Word
+; compare word a with b, if agree given #true if disagree given #false
+;(define (compare-word a b) (make-word ... .. ...))
+
+;(define (compare-word a b)
+;  (... a b)
+;  (... (word-first a) (word-first b)
+;  (... (word-second a) (word-second b)
+;  (... (word-third a) (word-third b))
+
+; compare word a with b, if agree given #true if disagree given #false
+(check-expect (compare-word ex1 "dog") #f)
+(check-expect (compare-word ex1 (make-word "d" "o" "g")) (make-word "d" "o" "g"))
+(check-expect (compare-word ex1 ex4) (make-word #f "o" "g"))
+(check-expect (compare-word ex1 ex3) (make-word #f #f #f))
+
+(define (compare-word a b)
+  (if (and (word? a) (word? b))
+      (make-word
+       (compare-letter (word-first a) (word-first b))
+       (compare-letter (word-second a) (word-second b))
+       (compare-letter (word-third a) (word-third b)))
+      #f))
+
+; Letter -> Letter
+; compare Letter a with Letter b
+; if equal give back its value
+; if not equal give #f
+(check-expect (compare-letter "t" "t") "t")
+(check-expect (compare-letter "r" "t") #f)
+
+(define (compare-letter a b)
+  (if (equal? a b)
+      a
+      #f))

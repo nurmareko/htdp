@@ -1,0 +1,16 @@
+; Letter is one of:
+; - #false
+; - OneLetterString, "a" through "z"
+; examples:
+;   #f
+;   "a"
+;   ...
+;   "y"
+;   "z"
+
+(define-struct word [first second third])
+; Word is (make-word Letter Letter Letter)
+; examples:
+;   (define ex1 (make-word "d" "o" "g"))
+;   (define ex2 (make-word #f "a" "t"))
+;   (define ex3 (make-word #f #f #f))

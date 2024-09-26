@@ -1,0 +1,17 @@
+what it does?
+the function does comparison of word and comparison of letter
+
+what it consume?
+two instance of Word structure type
+
+what it produce?
+a Word structure type
+
+what it mean to compare word?
+the function compare if the the two given instance are the same structure
+type, if it the true then its compare the letter if it false it give #f
+
+what it mean to compare letter?
+the function compare each field of the two the given structure type
+if it equal it retains its content 
+if it not equal it replace the field with #false

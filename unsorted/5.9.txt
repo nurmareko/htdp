@@ -1,0 +1,7 @@
+(define-struct space-game [ufo tank])
+
+; SpaceGame is (make-space-game Number Number)
+; interpretation ufo y coordinate, and tank x coordinate.
+
+; SpaceGame is (make-space-game Posn Number)
+; interpretation ufo x and y coordinates, and tank x coordinate

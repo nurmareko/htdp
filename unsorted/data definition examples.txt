@@ -1,0 +1,53 @@
+Number
+String
+Boolean
+Image
+Posn
+
+; Posn is (make-posn Number Number)
+
+(define MTS (empty-scene 100 100))
+(define DOT (circle 3 "solid" "red"))
+ 
+; A Posn represents the state of the world.
+ 
+; Posn -> Posn 
+(define (main p0)
+  (big-bang p0
+    [on-tick x+]
+    [on-mouse reset-dot]
+    [to-draw scene+dot]))
+
+; Water is a Number.
+; interpretation represents Liters
+
+; Temperature is a Number. 
+; interpretation represents Celsius degrees
+
+; Age is a Number.
+; interpretation represents age in day
+
+; Age is a Number.
+; interpretation represents age in year
+
+; Speed is a Number.
+; interpretation represents km/h
+
+; Height is a Number.
+; interpretaion represents Centimeters
+
+; Distance is a Number.
+; interpetation represent kilometers
+
+; Name is a String.
+; interpretation represent a person name
+
+; Title is a String.
+; interpertation represent a movie title
+
+; Grade is a String.
+; interpretation represent student grade
+
+; IsFull is a Boolean.
+; interpretation 
+

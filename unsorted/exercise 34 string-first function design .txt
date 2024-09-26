@@ -1,0 +1,42 @@
+Exercise 34. Design the function string-first, 
+which extracts the first character from a non-empty string. 
+Don’t worry about empty strings. 
+
+	1. From Problem Analysis to Data Definitions
+
+the first character from a string is 
+a 1-letter substring at position 0.
+
+	2. Signature, Purpose Statement, Header
+
+; consume a String and Produce a String:
+; String -> String
+; extract a-string substring and produce "a" 
+; (define (f a-string) "a")
+
+	3. Functional Examples
+
+; given: 
+	"hello" for a-string
+; expected:
+	"h"
+; (define (f a-string) "a")
+
+	4. Function Template
+
+ (define (string-first s) 
+	(... s ...))
+
+	5. Function Definition
+
+(define (string-first s) 
+	(string-ith s 0))
+
+
+
+
+
+
+
+
+

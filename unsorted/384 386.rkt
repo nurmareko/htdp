@@ -1,0 +1,108 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |384 386|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp")) #f)))
+; An Xexpr.v3 is one of:
+;  – Symbol
+;  – String
+;  – Number
+;  – (cons Symbol (cons Attribute*.v3 [List-of Xexpr.v3]))
+;  – (cons Symbol [List-of Xexpr.v3])
+; 
+; An Attribute*.v3 is a [List-of Attribute.v3].
+;   
+; An Attribute.v3 is a list of two items:
+;   (list Symbol String)
+;====================================================;
+(define PREFIX "Https://www.google.com/finance?q=")
+(define SIZE 22) ; font size 
+ 
+(define-struct data [price delta])
+; A StockWorld is a structure: (make-data String String)
+ 
+; String -> StockWorld
+; retrieves the stock price of co and its change every 15s
+(define (stock-alert co)
+  (local (; the URL address 
+          (define url (string-append PREFIX co))
+          ; [StockWorld -> StockWorld]
+          ; get the most recent data from the web as an instance
+          ; of StockWorld 
+          (define (retrieve-stock-data __w)
+            (local ((define x (read-xexpr/web url)))
+              (make-data (get x "price")
+                         (get x "priceChange"))))
+          ; StockWorld -> Image
+          ; render the instance of StockWorld
+          (define (render-stock-data w)
+            (local (; [StockWorld String -> String] -> Image
+                    ; render the word
+                    (define (word sel col)
+                      (text (sel w) SIZE col)))
+              (overlay (beside (word data-price 'black)
+                               (text "  " SIZE 'white)
+                               (word data-delta 'red))
+                       (rectangle 300 35 'solid 'white)))))
+    (big-bang (retrieve-stock-data 'no-use)
+      [on-tick retrieve-stock-data 15]
+      [to-draw render-stock-data])))
+
+; Xexpr.v3 String -> String
+; retrieves the value of the "content" attribute 
+; from a 'meta element that has attribute "itemprop"
+; with value s
+(check-expect
+  (get '(meta ((content "+1") (itemprop "F"))) "F")
+  "+1")
+(check-error
+  (get '(meta ((content "+1") (itemprop "F"))) "G"))
+ 
+(define (get x s)
+  (local ((define result (get-xexpr x s)))
+    (if (string? result)
+        result
+        (error "not found"))))
+
+; Xexpr.v3 String -> [Maybe String]
+; retrieves the value of the "content" attribute 
+; from a 'meta element that has attribute "itemprop"
+; with value s
+
+(check-expect
+  (get-xexpr '(meta ((content "+1") (itemprop "F"))) "F")
+  "+1")
+(check-expect
+  (get-xexpr '(meta ((content "+1") (itemprop "F"))) "G") #false)
+
+(define (get-xexpr x s)
+  (local ((define attr* (xexpr-attr x)))
+    (if (equal? s (second (assoc 'itemprop attr*)))
+        (second (assoc 'content attr*))
+        #false)))
+;===================================================;
+; Xexpr.v2 -> [List-of Attribute]
+; retrieves the list of attributes of xe
+(define (xexpr-attr xe)
+  (local ((define optional-loa+content (rest xe)))
+    (cond
+      [(empty? optional-loa+content) '()]
+      [else
+       (local ((define loa-or-x
+                 (first optional-loa+content)))
+         (if (list-of-attributes? loa-or-x)
+             loa-or-x
+             '()))])))
+
+; AttrsOrXexpr -> Boolean
+; is x a list of attributes
+(define (list-of-attributes? x)
+  (cond
+    [(empty? x) #true]
+    [else
+     (local ((define possible-attribute (first x)))
+       (cons? possible-attribute))]))
+
+; [X Y] [List-of [List X Y]] X -> Y
+; finds the matching Y for the given X in alist
+(define (find alist x)
+  (local ((define fm (assoc x alist)))
+    (if (cons? fm) (second fm) (error "not found"))))

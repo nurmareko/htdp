@@ -1,0 +1,13 @@
+[X] X [List-of X] -> [Maybe [List-of X]]
+(find x lx)
+possible input variation
+- x empty
+- x (list x)
+
+l is empty
+the result  will always #false
+
+l is non-empty list
+the result can be #false or (list x)
+- x not on lx = #false
+- x on lx = (list x) and check if it the correct sublist

@@ -1,0 +1,23 @@
+[List-of String] -> Letter-Counts
+most-frequent li-s
+produces the Letter-Count for the letter that is most frequently
+used as the first one in the words of the given Dictionary.
+
+[List-of Letter-Count] -> [List-of Letter-Count]
+sort-max l-lc
+sort list of Letter-Counts by its count in descending order
+
+[List-of 1String] -> [List-of Letter-Count]
+list-LC l-let
+create-LC for every letter in LETTERS
+
+1String -> Letter-Count
+create-LC 1-s
+make a letter count with 1String as it name and count how many time
+1String used as the first letter in Dictionary
+
+1String -> Number
+count-letters 1-s
+count how many time 1String used as the first letter in Dictionary
+
+

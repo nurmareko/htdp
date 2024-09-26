@@ -1,0 +1,34 @@
+design edit
+
+what are edit?
+edit are on-key event handler for world progam
+
+what it does?
+its have 5 various condition:
+- add a single-character KeyEvent ke to the end of pre field ed,
+- when "\b" (backspace) key pressed it delete the last character
+  on pre field of ed (if there any),
+- when "left" (left arrow key) pressed move cursor one position
+  to the left (if there any),
+- when "right" (right arrow key) pressed move cursor one
+  position to the left (if there any),
+- ignore "\t" (tab) "\r" (return) key and all other such
+  KeyEvents are ignored.
+
+what it consume?
+Editor instance ed, and keyEvent ke
+
+what it produce?
+Editor instance
+
+does it have auxiliary functions?
+It uses auxiliary functions to deal with the Editor structure
+
+delete
+move cursor left right
+- remove subtring at choosen position
+- add substring at choosen position
+- create text image from two string
+
+does it have constants?
+no

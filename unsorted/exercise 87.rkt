@@ -1,0 +1,106 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |exercise 87|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp")) #f)))
+(define-struct editor [txt pos])
+; An Editor is a structure:
+;   (make-editor String Number)
+; interpretation cursor position(pos) on a text(txt)
+
+; constants
+(define CURSOR (rectangle 1 20 "solid" "red"))
+(define TXT-SZ 16)
+(define TXT-CL "black")
+(define BG (empty-scene 200 20))
+(define TXT-LIMIT 190)
+
+;auxiliary functions
+; String Number -> String
+; delete substring base on (i) position
+(define (str-del str i)
+  (string-append (substring str 0 i) (substring str (+ i 1))))
+
+; String Number Keyevents -> String
+; insert substring base on keyevents on (i) position on a string
+(define (str-ins str i k)
+  (string-append (substring str 0 i) k (substring str i)))
+
+; Editor -> Image
+; render text as image
+(define (display-txt ed)
+  (beside
+    (text (substring (editor-txt ed) 0 (editor-pos ed)) TXT-SZ TXT-CL)
+    CURSOR
+    (text (substring (editor-txt ed) (editor-pos ed)) TXT-SZ TXT-CL)))
+
+; Editor KeyEvents -> Editor
+; write text
+(define (write-txt ed ke)
+  (make-editor (str-ins (editor-txt ed) (editor-pos ed) ke) (+ (editor-pos ed) 1)))
+
+; Editor -> Editor
+; delete text
+(define (delete-txt ed)
+  (make-editor (str-del (editor-txt ed) (- (editor-pos ed) 1)) (- (editor-pos ed) 1)))
+
+; Editor KeyEvents -> editor
+; move cursor one character to the left
+(define (cursor-left ed ke)
+  (make-editor (editor-txt ed) (- (editor-pos ed) 1)))
+
+; Editor KeyEvents -> editor
+; move cursor one character to the right
+(define (cursor-right ed ke)
+  (make-editor (editor-txt ed) (+ (editor-pos ed) 1)))
+
+; Editor -> Editor
+; main
+(define (run ed)
+  (big-bang ed
+    [to-draw render]
+    [on-key edit]))
+
+; Editor -> Image
+; render image base on editor state
+(define (render ed)
+  (overlay/align 
+   "left" "center"
+   (display-txt ed)
+   BG))
+
+; Editor KeyEvent -> Editor
+; on-key event handler
+; type character on space
+; left arrow to move cursor one position to the left if there any
+; right arrow to move cursor one position to the right if there any
+; backspace to delete existing character
+; ignore tab and return key
+(check-expect (edit (make-editor "fictionjunction" 7) "\t") (make-editor "fictionjunction" 7))
+(check-expect (edit (make-editor "fictionjunction" 7) "\r") (make-editor "fictionjunction" 7))
+(check-expect (edit (make-editor "fictionjunction" 7) "\b") (make-editor "fictiojunction" 6))
+(check-expect (edit (make-editor "fictionjunction" 7) "_") (make-editor "fiction_junction" 8))
+(check-expect (edit (make-editor "fictionjunction" 7) "left") (make-editor "fictionjunction" 6))
+(check-expect (edit (make-editor "fictionjunction" 0) "left") (make-editor "fictionjunction" 0))
+(check-expect (edit (make-editor "fictionjunction" 7) "right") (make-editor "fictionjunction" 8))
+(check-expect (edit (make-editor "fictionjunction" 15) "right") (make-editor "fictionjunction" 15))
+(check-expect (edit (make-editor "fictionjunctionggggggggggg" 15) " ") (make-editor "fictionjunctionggggggggggg" 15))
+
+(define (edit ed ke)
+  (cond
+    [(equal? "left" ke)
+     (if (= 0 (editor-pos ed))
+         ed
+         (cursor-left ed ke))]
+    [(equal? "right" ke)
+     (if (= (string-length (editor-txt ed)) (editor-pos ed))
+         ed
+         (cursor-right ed ke))]
+    [(or (equal? "\t" ke) (equal? "\r" ke))
+     ed]
+    [(equal? "\b" ke)
+     (if (= 0 (editor-pos ed))
+         ed
+         (delete-txt ed))]
+    [else
+     (if (>= (image-width (display-txt ed)) TXT-LIMIT)
+         ed
+         (write-txt ed ke))]))

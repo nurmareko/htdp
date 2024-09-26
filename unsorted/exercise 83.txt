@@ -1,0 +1,14 @@
+(define-struct editor [pre post])
+; An Editor is a structure:
+;   (make-editor String String)
+; interpretation (make-editor s t) describes an editor
+; whose visible text is (string-append s t) with 
+; the cursor displayed between s and t
+
+; Editor -> Image
+; display entire text
+
+(check-expect (render (make-editor "spag" "hetti")) "spaghetti")
+
+(define (render x)
+  (text (string-append (editor-pre x) (editor-post x)) 24 "olive"))

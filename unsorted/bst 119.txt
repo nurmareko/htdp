@@ -1,0 +1,60 @@
+; A BST (short for binarySearchTree)
+; is a BT according to the following conditions:
+; – NONE
+; – (make-node ssn0 name0 L R) is a BST if:
+;   - L is a BST,
+;   - R is a BST,
+;   - all ssn fields in L are smaller than ssn0,
+;   - all ssn fields in R are larger than ssn0.
+
+
+			40
+		30		50
+	20		    		60
+			 |45|
+10	   |25|				70
+
+(define n40 (make-node 40 's n30 n50)
+
+(create-bst n40 25 'i)
+
+==
+(if (< n (node-right b))
+    (make-node (node-ssn b) 
+	         (node-name b)
+	         (create-bst (node-left b) n s)
+	         (node-right b))
+    (make-node (node-ssn b) 
+	         (node-name b)
+		   (node-left b)
+	         (create-bst (node-left b) n s)))
+
+
+n = 30
+
+if 30 smaller than 63 chose left field
+if left field is NONE create there
+if left field is not NONE recurr
+
+(make-node (node-ssn b) 
+	     (node-name b)
+	         (create-bst (node-left b) n s)
+	     (node-right b))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

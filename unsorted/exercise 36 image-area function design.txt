@@ -1,0 +1,34 @@
+Exercise 36. Design the function image-area, which counts 
+the number of pixels in a given image.
+
+; require "2htdp/image" teachpack
+; use Number bigger than 0 
+; computes the area of rectangular image.
+; consume an Image and produce a Number:
+; Image -> Number
+; calculate img width and height to produce 0
+; (define (f image) 0)
+; given:
+; 	20x85 Image
+; expected:
+; 	1700
+; given:
+; 	40x40 Image
+; expected:
+; 	1600
+
+(define (image-area img)
+  (* (image-width img) (image-height img)))
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+; Position is a Number in the range of background width
+; interpretation represent cat horizontal position on the canvas
+
+; Happiness is Number between 0 trough 100
+; interpretation 0 for lowest and 100 for maximum happiness level
+
+; Direction is one of:
+; - "l"
+; - "r"
+; interpretation "l" to go left and "r" to go right
+
+(define-struct cat [x h d])
+; Cat is a structure:
+;   (make-cat Position Hapinness Direction)
+; interpretation describes a virtual cat whose standing at position (x)
+; with happines level of (h) and walking direction of (d)
+
+; cat image A
+(define A .)
+
+; cat image B
+(define B .)
+
+; Cat -> Image
+; render cat happiness gauge base on happiness level
+(define (happy c)
+  (overlay/align
+   "middle" "bottom"
+   (rectangle 10 (cat-h c) "solid" "red")
+   (rectangle 11 101 "outline" "black")))
+
+; functional test 
+(define test (make-cat 40 100 "l"))
+
+; Cat -> Cat
+; launches the program from some initial state
+(define (happy-cat c)
+  (big-bang c
+    [to-draw render]
+    [on-tick walk 0.065]))
+
+; Cat -> Image
+; places cat into the background,
+; according to the given cat state 
+(define (render c)
+  (place-image (happy c)
+               6 51
+               (place-image (if (odd? (cat-x c))
+                                A B)
+                            (cat-x c) 100
+                            (empty-scene 300 200))))
+
+; Cat -> Cat
+; move cat 3 pixels for every clock tick
+; it the cat reach the backgorund edge it will turn to oposite directron
+; if the happiness level reach 0 the cat stop moving
+(define (walk c)
+  (if (= (cat-h c) 0)
+      c
+      (cond
+        [(equal? (cat-d c) "r")
+         (if (>= (cat-x c) 260)
+             (make-cat (cat-x c) (cat-h c) "l")
+             (make-cat (+ (cat-x c) 3) (if (= (cat-h c) 0) (cat-h c) (- (cat-h c) 1)) (cat-d c)))]
+        [(equal? (cat-d c) "l")
+         (if (<= (cat-x c) 40)
+             (make-cat (cat-x c) (cat-h c) "r")
+             (make-cat (- (cat-x c) 3) (if (= (cat-h c) 0) (cat-h c) (- (cat-h c) 1)) (cat-d c)))])))

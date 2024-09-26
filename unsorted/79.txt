@@ -1,0 +1,31 @@
+; H is a Number between 0 and 100.
+; interpretation represents a happiness value
+; examples:
+;  0
+;  55
+;  23
+;  100
+ 
+(define-struct person [fstname lstname ismale])
+; A Person is a structure:
+;   (make-person String String Boolean)
+; examples:
+;   (make-person "john" "doe" #t)
+;   (make-person "angela" "yu" #f)
+
+(define-struct dog [owner name age happiness])
+; A Dog is a structure:
+;   (make-dog Person String PositiveInteger H)
+; interpretation the dog owner, its name, its age, and its happiness level
+; examples:
+;  (make-dog (make-person "dwayne" "johnson" #t) "gus" "4" 100)
+;  (make-dog (make-person "susan" "boyle" #f) "luna" "12" 55)
+
+; A Weapon is one of: 
+; — #false
+; — Posn
+; interpretation #false means the missile hasn't 
+; been fired yet; a Posn means it is in flight
+; examples:
+;   #f
+;   (make-posn 0 25)

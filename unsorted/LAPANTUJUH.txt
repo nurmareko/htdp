@@ -1,0 +1,37 @@
+_helloworld
+hello_world
+helloworld_
+_
+
+(define ex1 (make-editor "helloworld" 0))
+(define ex2 (make-editor "helloworld" 5))
+(define ex3 (make-editor "helloworld" 10))
+(define ex4 (make-editor "" 0))
+
+(check-expect (edit ex1 " ") (make-editor " helloworld" 1))
+(check-expect (edit ex2 " ") (make-editor "hello world" 6))
+(check-expect (edit ex3 " ") (make-editor "helloworld " 11))
+(check-expect (edit ex4 " ") (make-editor " " 1))
+(check-expect (edit ex1 "0") (make-editor "0helloworld" 1))
+(check-expect (edit ex1 "\b") (make-editor "helloworld" 0))
+(check-expect (edit ex2 "\b") (make-editor "hellworld" 4))
+(check-expect (edit ex3 "\b") (make-editor "helloworl" 9))
+(check-expect (edit ex4 "\b") (make-editor "" 0))
+(check-expect (edit ex1 "left") (make-editor "helloworld" 0))
+(check-expect (edit ex2 "left") (make-editor "helloworld" 4))
+(check-expect (edit ex3 "left") (make-editor "helloworld" 9))
+(check-expect (edit ex4 "left") (make-editor "" 0))
+(check-expect (edit ex1 "right") (make-editor "helloworld" 1))
+(check-expect (edit ex2 "right") (make-editor "helloworld" 5))
+(check-expect (edit ex3 "right") (make-editor "helloworld" 10))
+(check-expect (edit ex4 "right") (make-editor "" 0))
+(check-expect (edit ex1 "\t") (make-editor "helloworld" 0))
+(check-expect (edit ex1 "\r") (make-editor "helloworld" 0))
+(check-expect (edit ex1 "up") (make-editor "helloworld" 0))
+(check-expect (edit ex1 "down") (make-editor "helloworld" 0))
+(check-expect (edit ex1 "shift") (make-editor "helloworld" 0))
+(check-expect (edit ex5 "e") (make-editor "change the world my final m" 17))
+
+
+
+

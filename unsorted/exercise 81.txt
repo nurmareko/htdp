@@ -1,0 +1,32 @@
+Exercise 81. Design the function time->seconds, which consumes instances
+of time structures (see exercise 77) and produces the number of seconds
+that have passed since midnight. For example, if you are representing 12
+hours, 30 minutes, and 2 seconds with one of these structures and if you
+then apply time->seconds to this instance, the correct result is 45002.
+
+; A PositiveNumber is a Number greater than/equal to 0.
+
+; A Time is a structure:
+;   (make-time PositiveNumber PositiveNumber PositiveNumber)
+; interpretation represent hour, minute, and second
+
+; examples:
+;   (make-time 3 30 30)
+;   (make-time 0 240 5000)
+
+(define-struct time [hour minute second])
+
+Time -> Number
+; show time in seconds
+; (define (time->seconds t) Number)
+
+(check-expect (time->seconds (make-time 12 30 2)) 45002)
+(check-expect (time->seconds (make-time 0 0 45)) 45)
+(check-expect (time->seconds (make-time 0 4 0)) 240)
+(check-expect (time->seconds (make-time 7 0 0)) 25200)
+
+; (define (time->seconds t)
+;   (... (time-hour t) ... (time-minute t) ... (time-second t))
+
+(define (time->seconds t)
+  (+ (* 60 (+ (* 60 (time-hour t)) (time-minute t))) (time-second t))

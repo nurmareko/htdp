@@ -1,0 +1,12 @@
+; [X Y] [X Y -> Y] Y [List-of X] -> Y
+(define (fold combine base l)
+  (cond
+    [(empty? l) base]
+    [else (combine (first l)
+                   (fold combine base (rest l)))]))
+
+foldr work from oldest to latest
+retain composition as input list
+
+foldl work from latest to oldest
+reverse composition of input list

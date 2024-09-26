@@ -1,0 +1,34 @@
+	design render
+
+what are render?
+to-draw event handler function
+
+what it does?
+render an image of text within text box
+
+what it consume?
+Editor instance
+
+what it produce?
+Image
+
+	design edit
+
+what are edit?
+on-key event handler function
+
+what it does?
+- insert a substring to text field base on cursor position 
+- delete substring from text field base on cursor position
+- move cursor one position to the left when left arrow key
+  pressed
+- move cursor one position to the right when right arrow key
+  pressed
+- "\t" (tab) "\r" (return) key and all other such
+  KeyEvents are ignored.
+
+what it consume?
+Editor instance and KeyEvent
+
+what it produce?
+Editor instance

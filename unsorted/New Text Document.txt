@@ -1,0 +1,24 @@
+Exercise 51. Design a big-bang program that simulates
+a traffic light for a given duration. The program renders
+the state of a traffic light as a solid circle of the
+appropriate color, and it changes state on every clock
+tick. Hint Read the documentation for big-bang; there is
+a reason all these “words” are linked to their
+documentation. What is the most appropriate initial state?
+Ask your engineering friends.
+
+; A TrafficLight is one of the following Strings:
+; – "red"
+; – "green"
+; – "yellow"
+; interpretation the three strings represent the three 
+; possible states that a traffic light may assume 
+
+TraffictLight -> Image
+create a solid circle of the appropriate color base on
+TrafficLight state
+(define (render tl) Image)
+
+TrafficLight -> TrafficLight 
+determine what color should be the next state of TrafficLight
+(define (next-light s) "red")

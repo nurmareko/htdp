@@ -1,0 +1,18 @@
+(define-struct r3 [x y z])
+; An R3 is a structure:
+;   (make-r3 Number Number Number)
+;interpretation a 3-dimensional object with its coordinate x, y, and z
+ 
+(define ex1 (make-r3 1 2 13))
+(define ex2 (make-r3 -1 0 3))
+
+R3 -> Number
+; execute the distance formula of a 3-dimensional point to the origin on c
+(define (3d-distance p)
+  (... (r3-x p) = x coordinate ... (r3-y p) = y coordinate ... (r3-z p) = z coordinate ...)
+
+(check-expect (3d-object-distance ex1) #i13.19090595827292)
+(check-expect (3d-object-distance ex1) #i3.1622776601683795)
+
+(define (3d-distance p)
+  (sqrt (+ (sqr (r3-x p)) (sqr (r3-y p)) (sqr (r3-z p)))))

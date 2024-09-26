@@ -1,0 +1,5 @@
+; [X Y Z] [List-of X] (X Z -> Y)  Y -> Y
+
+; [List-of Number] (Number Number -> Number) Number -> Number
+
+; [List-of Posn] (Posn Image -> Image) Image -> Image

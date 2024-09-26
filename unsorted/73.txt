@@ -1,0 +1,4 @@
+Posn Number -> Posn
+place n at p's x position 
+(define (posn-up-x p n)
+  (make-posn n (posn-y p)))

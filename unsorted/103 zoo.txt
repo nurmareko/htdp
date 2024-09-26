@@ -1,0 +1,56 @@
+; Volume is a Number
+; interpretation represent Cubic centimeter (cm3)
+
+(define-struct spider [legs space])
+; Spider is (make-spider Number Volume)
+; interpretation the number of legs the spider have,
+; and the space volume required for transportation purpose
+(define spider-ex (make-spider 6 0.001))
+
+(define-struct elephant [space])
+; Elephant is (make-elephant Volume)
+; interpretation the space volume required for transportation
+; purpose
+(define elephant-ex (make-elephant 11))
+
+(define-struct boa [length girth])
+; BoaConstrictor is (make-boa Number Number)
+; interpretatin the body length in meter, and its average
+; diameter in cm
+(define boa-ex (make-boa 2 30))
+
+(define-struct armadillo [space]) 
+; Armadillo is (make-armadillo Volume)
+; interpretation the space volume required for transportation
+; purpose
+(define armadillo-ex (make-armadillo 0.01))
+
+; Cage is a Number
+; iterpretation represent Cubic centimeter (cm3)
+
+; ZooAnimal are one of:
+; - Spider
+; - Elephant
+; - Boa
+; - Armadillo
+
+; ZooAnimal Volume -> Boolean
+; determine whether ani will fit within cag
+(define (fits? ani cag)
+  (cond [(spider? ani)
+         (if (< (spider-space ani) cag) #t #f)]
+        [(elephant? ani)
+         (if (< (elephant-space ani) cag) #t #f)]
+        [(boa? ani)
+         (if (< (inexact->exact (* pi (sqr (* (/ (boa-girth ani) 2) 0.01)) 2)) cag) #t #f)]
+        [(armadillo? ani)
+         (if (< (armadillo-space ani) cag) #t #f)]))
+
+(check-expect (fits? spider-ex 12) #t)
+(check-expect (fits? elephant-ex 12) #t)
+(check-expect (fits? boa-ex 12) #t)
+(check-expect (fits? armadillo-ex 12) #t)
+(check-expect (fits? spider-ex 0.0005) #f)
+(check-expect (fits? elephant-ex 10) #f)
+(check-expect (fits? boa-ex 0.1) #f)
+(check-expect (fits? armadillo-ex 0.009) #f)

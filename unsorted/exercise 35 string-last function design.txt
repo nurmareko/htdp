@@ -1,0 +1,31 @@
+Exercise 35. Design the function string-last, which 
+extracts the last character from a non-empty string.
+
+the last character from a string is 
+a 1-letter substring at last position.
+
+; consume a String and produce a String:
+; String -> String 
+; extract a-string substring and produce "a" 
+ (define (f a-string) "a")
+
+; given:
+	"world"
+; expected:
+	"d"
+ (define (f "world") "d")
+
+ (define (string-last s)
+   (... s ...))
+
+ (define (string-last s)
+   (string-ith s (- (string-length s)  1)))
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |438 new|) (read-case-sensitive #t) (teachpacks ((lib "abstraction.rkt" "teachpack" "2htdp") (lib "image.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "abstraction.rkt" "teachpack" "2htdp") (lib "image.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp")) #f)))
+; N[>= 1] N[>= 1] -> N
+; finds the greatest common divisor of n and m
+
+(check-expect (gcd-structural 6 25) 1)
+(check-expect (gcd-structural 18 24) 6)
+
+(define (gcd-structural n m)
+  (local (; N -> N
+          ; determines the gcd of n and m less than i
+          (define (greatest-divisor-<= i)
+            (cond
+              [(= i 1) 1]
+              [else
+               (if (= (remainder n i) (remainder m i) 0)
+                   i
+                   (greatest-divisor-<= (- i 1)))])))
+    (greatest-divisor-<= (min n m))))
+;====================================================;
+; first greatest-divisor-<= check whether i is equal
+; to 1, if its the case then the gcd is 1, otherwise
+; it check whether n and m are both cleanly divisible
+; by i, if its the case then i is the gcd, else the
+; function generate new problem that is (i - 1).
+;
+; to find the greatest common divisor of two numbers
+; we only need to work on the smaller number because
+; we look for the biggest number between the smaller
+; number  and 1, that is divides both numbers evenly.

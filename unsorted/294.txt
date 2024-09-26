@@ -1,0 +1,36 @@
+is-index? x lx
+
+result must be #false or non-empty list of N
+(check-expect [(is-index? 0 '()) #false] #true)
+(check-expect [(is-index? 0 '(1)) #false] #true)
+(check-expect [(is-index? 0 '()) 0] #false)
+(check-expect [(is-index? 0 '(0)) #false] #false)
+(check-expect [(is-index? 0 '()) '()] #false)
+
+(check-expect [(is-index? 0 '(0)] 0] #true)
+(check-expect [(is-index? 0 '(0 1)] 0] #true)
+(check-expect [(is-index? 0 '(1 0)] 1] #true)
+(check-expect [(is-index? 0 '(1 0 1 0)] 1] #true)
+(check-expect [(is-index? 0 '(0)] 1] #false)
+(check-expect [(is-index? 0 '(1 1 1 0)] 4] #false)
+(check-expect [(is-index? 0 '(1 0 1 0)] 3] #false)
+
+if result is #false
+confirm that
+- lx is empty list, or
+- x is not appear in lx
+
+
+if result is other than #false
+confirm that result is a
+- Number,
+- (add1 result) is less than or equal to lx length, and 
+- result is the index of fist occurrence of x in lx
+
+
+
+
+
+
+
+
